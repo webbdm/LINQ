@@ -186,6 +186,19 @@ namespace LINQ
             new Customer(){ Name="Sid Brown", Balance=49582.68, Bank="CITI"}
         };
 
+            var customersByLastName = customers.GroupBy(c=>c.Name.Split(' ')[1]);
+
+            foreach (var group in customersByLastName)
+            {
+                var lastname = group.Key;
+                var totalMoney = group.Sum(customer => customer.Balance);
+                Console.WriteLine($"{lastname} has {totalMoney}");
+                foreach (var customer in group)
+                {
+                    Console.WriteLine($"{customer.Name} makes {customer.Balance}");
+                }
+            }
+ 
 
 
             var bankPeople = from bank in banks
